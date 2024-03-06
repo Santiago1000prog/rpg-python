@@ -45,3 +45,9 @@ class Personaje:
 
     def __str__(self):
         return f'{self.nombre} (Nivel {self.nivel})'
+    
+class Item:
+    def __init__(self, nombre, tipo, efecto):
+        self.nombre = nombre
+        self.tipo = tipo
+        self.efecto = efecto
