@@ -5,9 +5,12 @@ class Personaje:
         self.nombre = nombre
         self.nivel = 1
         self.salud = 100
-        self.ataque = 10
-        self.defensa = 5
-        self.equipamiento = {'arma': None, 'armadura': None}
+        self.salud_max = 100
+        self.ataque_base = 22
+        self.defensa_base = 5
+        self.ataque = self.ataque_base
+        self.defensa = self.defensa_base
+        self.equipamiento = {'arma': None, 'armadura': None, 'accesorio': None}
         self.inventario = []
         self.dinero = 0
         self.defendiendo = False
@@ -24,8 +27,8 @@ class Personaje:
 
     def curarse(self, pocion):
         self.salud += pocion.efecto
-        if self.salud > 100:
-            self.salud = 100
+        if self.salud > self.salud_max:
+            self.salud = self.salud_max
 
     def subir_exp(self, exp_ganada):
         self.experiencia += exp_ganada
@@ -37,11 +40,38 @@ class Personaje:
     def subir_nivel(self):
         self.nivel += 1
         print(f"¡Felicidades! Has alcanzado el nivel {self.nivel}.")
-        self.salud += random.randint(1, 3)
-        self.ataque += random.randint(1, 3)
-        self.defensa += random.randint(1, 3)
-        print(f"Tus nuevas estadísticas son: \nSalud: {self.salud} \nAtaque: {self.ataque} \nDefensa: {self.defensa}")
+        self.salud_max += random.randint(1, 3)
+        self.salud = self.salud_max
+        self.ataque_base += random.randint(1, 3)
+        self.defensa_base += random.randint(1, 3)
+        self.actualizar_estadisticas()
 
+    def actualizar_estadisticas(self):
+        ataque_equipo = 0
+        defensa_equipo = 0
+        salud_max_equipo = 0
+
+        for item in self.equipamiento.values():
+            if item:
+                if item.tipo == "arma":
+                    ataque_equipo += item.efecto
+                elif item.tipo == "armadura":
+                    defensa_equipo += item.efecto
+                elif item.tipo == "accesorio":
+                    salud_max_equipo += item.efecto
+
+        self.ataque = self.ataque_base + ataque_equipo
+        self.defensa = self.defensa_base + defensa_equipo
+        self.salud_max = self.salud_max + salud_max_equipo
+        self.salud = self.salud_max
+
+        print(f"Tus nuevas estadísticas son: \nSalud Máxima: {self.salud_max} \nAtaque: {self.ataque} \nDefensa: {self.defensa}")
 
     def __str__(self):
-        return f'{self.nombre} (Nivel {self.nivel})'
+        return f"Salud: {self.salud} / {self.salud_max} | Defensa: {self.defensa} | Ataque: {self.ataque}\nNivel: {self.nivel} | Dinero: {self.dinero}"
+    
+class Item:
+    def __init__(self, nombre, tipo, efecto):
+        self.nombre = nombre
+        self.tipo = tipo
+        self.efecto = efecto

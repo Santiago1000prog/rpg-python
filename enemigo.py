@@ -7,7 +7,7 @@ class Enemigo:
         self.recompensa = recompensa
 
     def atacar(self, personaje):
-        dano = self.ataque - personaje.defensa
+        dano = min(self.ataque - personaje.defensa, 0)
         if personaje.defendiendo:
             dano //= 2  # Reducir el daño a la mitad si el personaje se está defendiendo
             personaje.defendiendo = False
