@@ -81,11 +81,7 @@ def ver_inventario(personaje):
     else:
         print("Opción inválida. Intenta de nuevo.")
 
-    ver_inventario(personaje)
-
 def equipar_item(personaje):
-    ver_inventario(personaje)
-
     opcion = input("Ingresa el número del ítem que deseas equipar: ")
     try:
         indice = int(opcion) - 1
@@ -97,30 +93,40 @@ def equipar_item(personaje):
         elif item.tipo == "armadura":
             personaje.equipamiento["armadura"] = item
             print(f"Has equipado {item.nombre} como tu nueva armadura.")
+        elif item.tipo == "accesorio":
+            personaje.equipamiento["accesorio"] = item
+            print(f"Has equipado {item.nombre} como tu nuevo accesorio.")
         else:
             print("Este ítem no se puede equipar.")
+
+        personaje.actualizar_estadisticas()
 
     except (ValueError, IndexError):
         print("Opción inválida.")
 
-def obtener_nuevas_coordenadas(posicion_actual):
-    direcciones = {"norte": (-1, 0), "sur": (1, 0), "este": (0, 1), "oeste": (0, -1)}
+def obtener_nuevas_coordenadas(mapa, posicion_actual):
+    direcciones = {"norte": (0, -1), "sur": (0, 1), "este": (1, 0), "oeste": (-1, 0)}
     direccion = input("¿Hacia qué dirección deseas moverte? (norte, sur, este, oeste): ").lower()
 
     if direccion in direcciones:
         dx, dy = direcciones[direccion]
         nuevas_coordenadas = (posicion_actual[0] + dx, posicion_actual[1] + dy)
-        return nuevas_coordenadas
+
+        if mapa.coordenada_valida(nuevas_coordenadas):
+            return nuevas_coordenadas
+        else:
+            print("No puedes moverte ahí.", nuevas_coordenadas)
     else:
         print("Dirección inválida.")
-        return posicion_actual
+
+    return None
 
 def bucle_principal(personaje, mapa):
     posicion_actual = (0, 0)  # Posición inicial del personaje
 
     while True:
         print(f"\nEstás en: {mapa.describir_ubicacion(posicion_actual)}")
-        print(f"Salud: {personaje.salud} | Nivel: {personaje.nivel} | Dinero: {personaje.dinero}")
+        print(personaje)
         print("\nOpciones:")
         print("1. Moverte")
         print("2. Ver inventario")
@@ -130,9 +136,10 @@ def bucle_principal(personaje, mapa):
         opcion = input("Elige una opción: ")
 
         if opcion == "1":
-            nuevas_coordenadas = obtener_nuevas_coordenadas(posicion_actual)
-            mapa.mover_personaje(personaje, nuevas_coordenadas)
-            posicion_actual = nuevas_coordenadas
+            nuevas_coordenadas = obtener_nuevas_coordenadas(mapa, posicion_actual)
+            if nuevas_coordenadas is not None:
+                mapa.mover_personaje(personaje, nuevas_coordenadas)
+                posicion_actual = nuevas_coordenadas
         elif opcion == "2":
             ver_inventario(personaje)
         elif opcion == "3":

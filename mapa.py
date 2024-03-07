@@ -5,6 +5,7 @@ class Mapa:
 
     def mover_personaje(self, personaje, coordenadas):
         nueva_ubicacion = self.ubicaciones.get(coordenadas)
+        print(f"\nTe estás moviendo hacia: {coordenadas}")
 
         if nueva_ubicacion:
             if isinstance(nueva_ubicacion, dict):
@@ -12,8 +13,6 @@ class Mapa:
             else:
                 print(f"\nHas llegado a: {nueva_ubicacion}")
                 print("Parece que aquí no hay nada interesante.")
-        else:
-            print("No puedes moverte ahí.")
 
     def procesar_ubicacion(self, personaje, nueva_ubicacion):
         print(f"\nHas llegado a: {nueva_ubicacion['descripcion']}")
@@ -36,14 +35,20 @@ class Mapa:
 
     def describir_ubicacion(self, coordenadas):
         ubicacion = self.ubicaciones.get(coordenadas)
-        return ubicacion if ubicacion else "Ubicación desconocida"
-    
-            # "enemigo": Enemigo("Lobo Feroz", 30, 8, 2, 15)
-    
+        if isinstance(ubicacion, dict):
+            return f"\n{ubicacion['descripcion']}"
+        elif isinstance(ubicacion, str):
+            return f"\n{ubicacion}"
+        else:
+            return "\nNo hay nada interesante aquí."
+        
+    def coordenada_valida(self, coord):
+        return coord[0] >= 0 and coord[0] < self.dimensiones[0] and coord[1] >= 0 and coord[1] < self.dimensiones[1]
 
 def iniciar_combate(personaje, enemigo):
     print(f"¡Comienza el combate contra {enemigo.nombre}!")
 
+    exp_a_ganar = enemigo.salud
     while True:
         opcion = input("¿Qué deseas hacer? (atacar/defender/huir): ").lower()
 
@@ -54,7 +59,7 @@ def iniciar_combate(personaje, enemigo):
             if enemigo.salud <= 0:
                 print(f"¡Has derrotado a {enemigo.nombre}!")
                 personaje.dinero += enemigo.recompensa
-                exp_ganada = enemigo.salud
+                exp_ganada = exp_a_ganar * 2
                 personaje.subir_exp(exp_ganada)
                 print(f"Has obtenido {enemigo.recompensa} monedas de oro y {exp_ganada} puntos de experiencia.")
                 break
