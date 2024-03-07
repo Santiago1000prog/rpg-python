@@ -2,6 +2,7 @@ from personaje import Personaje, Item
 from enemigo import Enemigo
 from mapa import Mapa
 
+
 def inicializar_juego():
     nombre_personaje = input("Ingresa el nombre de tu personaje: ")
     personaje = Personaje(nombre_personaje)
@@ -12,50 +13,73 @@ def inicializar_juego():
         (0, 0): "Ciudad Principal. Aquí comenzó tu aventura.",
         (2, 2): {
             "descripcion": "Bosque Oscuro. Tendrás que estar alerta.",
-            "items": [Item("Espada Oxidada", "arma", 5), Item("Poción Menor", "pocion", 10)],
+            "items": [
+                Item("Espada Oxidada", "arma", 5),
+                Item("Poción Menor", "pocion", 10),
+            ],
             "dinero": 20,
-            "enemigo": Enemigo("Lobo Feroz", 30, 8, 2, 15)
+            "enemigo": Enemigo("Lobo Feroz", 30, 8, 2, 15),
         },
         (5, 5): "Cueva Misteriosa. ¿Qué secretos esconderá?",
-		(0, 3): {
-			"descripcion": "Pantano Tenebroso. Un pantano oscuro y peligroso lleno de criaturas peligrosas.",
-			"items": [Item("Botas de Pantano", "armadura", 5), Item("Daga Venenosa", "arma", 7), Item("Poción Mayor", "pocion", 50)],
-			"dinero": 40,
-			"enemigo": Enemigo("Serpiente del Pantano", 50, 8, 5, 30)
-		},
-		(6, 3): {
-			"descripcion": "Cavernas Profundas. Intrincadas cavernas subterráneas que esconden secretos antiguos.",
-			"items": [Item("Casco de Minero", "armadura", 6), Item("Pico Afilado", "arma", 9)],
-			"dinero": 70,
-			"enemigo": Enemigo("Murciélago Gigante", 55, 9, 6, 35)
-		},
-		(3, 6): {
-			"descripcion": "Pradera Floreciente. Una vasta pradera cubierta de flores silvestres y mariposas.",
-			"items": [Item("Capa de Flores", "armadura", 4), Item("Espada de Pradera", "arma", 6)],
-			"dinero": 30,
-			"enemigo": Enemigo("Lobo de Pradera", 45, 7, 4, 25)
-		},
-		(1, 0): {
-			"descripcion": "Bosque Sombrío. Un bosque oscuro y tenebroso donde habitan criaturas siniestras.",
-			"items": [Item("Capucha Siniestra", "armadura", 7), Item("Cuchillo Sombrío", "arma", 8)],
-			"dinero": 60,
-			"enemigo": Enemigo("Elfo Oscuro", 65, 11, 7, 45)
-		},
-		(5, 5): {
-			"descripcion": "Llanura Infinita. Una llanura interminable y despejada, perfecta para viajar.",
-			"items": [Item("Escudo de Llanura", "armadura", 8), Item("Lanza de Llanura", "arma", 10)],
-			"dinero": 90,
-			"enemigo": Enemigo("Centauro de Llanura", 75, 12, 9, 55)
-		},
-		(6, 0): {
-			"descripcion": "Acantilado Escarpado. Un impresionante acantilado con vistas al mar azul profundo.",
-			"items": [Item("Botas de Escalador", "armadura", 9), Item("Espada del Acantilado", "arma", 11)],
-			"dinero": 100,
-			"enemigo": Enemigo("Grifo del Acantilado", 85, 13, 10, 65)
-		}
+        (0, 3): {
+            "descripcion": "Pantano Tenebroso. Un pantano oscuro y peligroso lleno de criaturas peligrosas.",
+            "items": [
+                Item("Botas de Pantano", "armadura", 5),
+                Item("Daga Venenosa", "arma", 7),
+                Item("Poción Mayor", "pocion", 50),
+            ],
+            "dinero": 40,
+            "enemigo": Enemigo("Serpiente del Pantano", 50, 8, 5, 30),
+        },
+        (6, 3): {
+            "descripcion": "Cavernas Profundas. Intrincadas cavernas subterráneas que esconden secretos antiguos.",
+            "items": [
+                Item("Casco de Minero", "armadura", 6),
+                Item("Pico Afilado", "arma", 9),
+            ],
+            "dinero": 70,
+            "enemigo": Enemigo("Murciélago Gigante", 55, 9, 6, 35),
+        },
+        (3, 6): {
+            "descripcion": "Pradera Floreciente. Una vasta pradera cubierta de flores silvestres y mariposas.",
+            "items": [
+                Item("Capa de Flores", "armadura", 4),
+                Item("Espada de Pradera", "arma", 6),
+            ],
+            "dinero": 30,
+            "enemigo": Enemigo("Lobo de Pradera", 45, 7, 4, 25),
+        },
+        (1, 0): {
+            "descripcion": "Bosque Sombrío. Un bosque oscuro y tenebroso donde habitan criaturas siniestras.",
+            "items": [
+                Item("Capucha Siniestra", "armadura", 7),
+                Item("Cuchillo Sombrío", "arma", 8),
+            ],
+            "dinero": 60,
+            "enemigo": Enemigo("Elfo Oscuro", 65, 14, 7, 45),
+        },
+        (5, 5): {
+            "descripcion": "Llanura Infinita. Una llanura interminable y despejada, perfecta para viajar.",
+            "items": [
+                Item("Escudo de Llanura", "armadura", 8),
+                Item("Lanza de Llanura", "arma", 10),
+            ],
+            "dinero": 90,
+            "enemigo": Enemigo("Centauro de Llanura", 75, 12, 9, 55),
+        },
+        (6, 0): {
+            "descripcion": "Acantilado Escarpado. Un impresionante acantilado con vistas al mar azul profundo.",
+            "items": [
+                Item("Botas de Escalador", "armadura", 9),
+                Item("Espada del Acantilado", "arma", 11),
+            ],
+            "dinero": 100,
+            "enemigo": Enemigo("Grifo del Acantilado", 85, 13, 10, 65),
+        },
     }
 
     return personaje, mapa
+
 
 def ver_inventario(personaje):
     print("\nInventario:")
@@ -65,7 +89,7 @@ def ver_inventario(personaje):
     opcion = input("\n¿Qué deseas hacer? (comprar/vender/equipar/salir): ").lower()
 
     if opcion == "comprar":
-        # Implementar lógica de compra de ítems
+        # Lógica de compra de ítems
         pass
     elif opcion == "vender":
         indice_venta = input("Ingresa el número del ítem que deseas vender: ")
@@ -80,6 +104,7 @@ def ver_inventario(personaje):
         return
     else:
         print("Opción inválida. Intenta de nuevo.")
+
 
 def equipar_item(personaje):
     opcion = input("Ingresa el número del ítem que deseas equipar: ")
@@ -104,9 +129,12 @@ def equipar_item(personaje):
     except (ValueError, IndexError):
         print("Opción inválida.")
 
+
 def obtener_nuevas_coordenadas(mapa, posicion_actual):
     direcciones = {"norte": (0, -1), "sur": (0, 1), "este": (1, 0), "oeste": (-1, 0)}
-    direccion = input("¿Hacia qué dirección deseas moverte? (norte, sur, este, oeste): ").lower()
+    direccion = input(
+        "¿Hacia qué dirección deseas moverte? (norte, sur, este, oeste): "
+    ).lower()
 
     if direccion in direcciones:
         dx, dy = direcciones[direccion]
@@ -120,6 +148,7 @@ def obtener_nuevas_coordenadas(mapa, posicion_actual):
         print("Dirección inválida.")
 
     return None
+
 
 def bucle_principal(personaje, mapa):
     posicion_actual = (0, 0)  # Posición inicial del personaje
@@ -148,6 +177,7 @@ def bucle_principal(personaje, mapa):
             break
         else:
             print("Opción inválida. Intenta de nuevo.")
+
 
 personaje, mapa = inicializar_juego()
 bucle_principal(personaje, mapa)
