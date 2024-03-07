@@ -81,55 +81,6 @@ def inicializar_juego():
     return personaje, mapa
 
 
-def ver_inventario(personaje):
-    print("\nInventario:")
-    for i, item in enumerate(personaje.inventario, 1):
-        print(f"{i}. {item.nombre} ({item.tipo})")
-
-    opcion = input("\n¿Qué deseas hacer? (comprar/vender/equipar/salir): ").lower()
-
-    if opcion == "comprar":
-        # Lógica de compra de ítems
-        pass
-    elif opcion == "vender":
-        indice_venta = input("Ingresa el número del ítem que deseas vender: ")
-        try:
-            indice = int(indice_venta) - 1
-            personaje.vender_item(indice)
-        except ValueError:
-            print("Entrada inválida.")
-    elif opcion == "equipar":
-        equipar_item(personaje)
-    elif opcion == "salir":
-        return
-    else:
-        print("Opción inválida. Intenta de nuevo.")
-
-
-def equipar_item(personaje):
-    opcion = input("Ingresa el número del ítem que deseas equipar: ")
-    try:
-        indice = int(opcion) - 1
-        item = personaje.inventario[indice]
-
-        if item.tipo == "arma":
-            personaje.equipamiento["arma"] = item
-            print(f"Has equipado {item.nombre} como tu nueva arma.")
-        elif item.tipo == "armadura":
-            personaje.equipamiento["armadura"] = item
-            print(f"Has equipado {item.nombre} como tu nueva armadura.")
-        elif item.tipo == "accesorio":
-            personaje.equipamiento["accesorio"] = item
-            print(f"Has equipado {item.nombre} como tu nuevo accesorio.")
-        else:
-            print("Este ítem no se puede equipar.")
-
-        personaje.actualizar_estadisticas()
-
-    except (ValueError, IndexError):
-        print("Opción inválida.")
-
-
 def obtener_nuevas_coordenadas(mapa, posicion_actual):
     direcciones = {"norte": (0, -1), "sur": (0, 1), "este": (1, 0), "oeste": (-1, 0)}
     direccion = input(
@@ -170,9 +121,9 @@ def bucle_principal(personaje, mapa):
                 mapa.mover_personaje(personaje, nuevas_coordenadas)
                 posicion_actual = nuevas_coordenadas
         elif opcion == "2":
-            ver_inventario(personaje)
+            personaje.ver_inventario()
         elif opcion == "3":
-            equipar_item(personaje)
+            personaje.equipar_item()
         elif opcion == "4":
             break
         else:
