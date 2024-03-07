@@ -1,5 +1,6 @@
 import random
 
+
 class Personaje:
     def __init__(self, nombre):
         self.nombre = nombre
@@ -10,12 +11,59 @@ class Personaje:
         self.defensa_base = 5
         self.ataque = self.ataque_base
         self.defensa = self.defensa_base
-        self.equipamiento = {'arma': None, 'armadura': None, 'accesorio': None}
+        self.equipamiento = {"arma": None, "armadura": None, "accesorio": None}
         self.inventario = []
         self.dinero = 0
         self.defendiendo = False
         self.experiencia = 0
         self.experiencia_requerida = 100
+
+    def ver_inventario(self):
+        print("\nInventario:")
+        for i, item in enumerate(self.inventario, 1):
+            print(f"{i}. {item.nombre} ({item.tipo})")
+
+        opcion = input("\n¿Qué deseas hacer? (comprar/vender/equipar/salir): ").lower()
+
+        if opcion == "comprar":
+            # Lógica de compra de ítems
+            pass
+        elif opcion == "vender":
+            indice_venta = input("Ingresa el número del ítem que deseas vender: ")
+            try:
+                indice = int(indice_venta) - 1
+                self.vender_item(indice)
+            except ValueError:
+                print("Entrada inválida.")
+        elif opcion == "equipar":
+            self.equipar_item()
+        elif opcion == "salir":
+            return
+        else:
+            print("Opción inválida. Intenta de nuevo.")
+
+    def equipar_item(self):
+        opcion = input("Ingresa el número del ítem que deseas equipar: ")
+        try:
+            indice = int(opcion) - 1
+            item = self.inventario[indice]
+
+            if item.tipo == "arma":
+                self.equipamiento["arma"] = item
+                print(f"Has equipado {item.nombre} como tu nueva arma.")
+            elif item.tipo == "armadura":
+                self.equipamiento["armadura"] = item
+                print(f"Has equipado {item.nombre} como tu nueva armadura.")
+            elif item.tipo == "accesorio":
+                self.equipamiento["accesorio"] = item
+                print(f"Has equipado {item.nombre} como tu nuevo accesorio.")
+            else:
+                print("Este ítem no se puede equipar.")
+
+            self.actualizar_estadisticas()
+
+        except (ValueError, IndexError):
+            print("Opción inválida.")
 
     def atacar(self, enemigo):
         dano = self.ataque - enemigo.defensa
@@ -65,11 +113,14 @@ class Personaje:
         self.salud_max = self.salud_max + salud_max_equipo
         self.salud = self.salud_max
 
-        print(f"Tus nuevas estadísticas son: \nSalud Máxima: {self.salud_max} \nAtaque: {self.ataque} \nDefensa: {self.defensa}")
+        print(
+            f"Tus nuevas estadísticas son: \nSalud Máxima: {self.salud_max} \nAtaque: {self.ataque} \nDefensa: {self.defensa}"
+        )
 
     def __str__(self):
         return f"Salud: {self.salud} / {self.salud_max} | Defensa: {self.defensa} | Ataque: {self.ataque}\nNivel: {self.nivel} | Dinero: {self.dinero}"
-    
+
+
 class Item:
     def __init__(self, nombre, tipo, efecto):
         self.nombre = nombre
