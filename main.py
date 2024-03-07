@@ -18,7 +18,7 @@ def inicializar_juego():
                 Item("Poción Menor", "pocion", 10),
             ],
             "dinero": 20,
-            "enemigo": Enemigo("Lobo Feroz", 30, 8, 2, 15),
+            "enemigo": Enemigo("Lobo Feroz", 55, 8, 2, 15),
         },
         (5, 5): "Cueva Misteriosa. ¿Qué secretos esconderá?",
         (0, 3): {
@@ -29,7 +29,7 @@ def inicializar_juego():
                 Item("Poción Mayor", "pocion", 50),
             ],
             "dinero": 40,
-            "enemigo": Enemigo("Serpiente del Pantano", 50, 8, 5, 30),
+            "enemigo": Enemigo("Serpiente del Pantano", 55, 8, 5, 30),
         },
         (6, 3): {
             "descripcion": "Cavernas Profundas. Intrincadas cavernas subterráneas que esconden secretos antiguos.",
@@ -38,7 +38,7 @@ def inicializar_juego():
                 Item("Pico Afilado", "arma", 9),
             ],
             "dinero": 70,
-            "enemigo": Enemigo("Murciélago Gigante", 55, 9, 6, 35),
+            "enemigo": Enemigo("Murciélago Gigante", 55, 9, 6, 60),
         },
         (3, 6): {
             "descripcion": "Pradera Floreciente. Una vasta pradera cubierta de flores silvestres y mariposas.",
