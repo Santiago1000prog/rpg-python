@@ -7,8 +7,8 @@ class Personaje:
         self.nivel = 1
         self.salud = 100
         self.salud_max = 100
-        self.ataque_base = 22
-        self.defensa_base = 5
+        self.ataque_base = 19
+        self.defensa_base = 9
         self.ataque = self.ataque_base
         self.defensa = self.defensa_base
         self.equipamiento = {"arma": None, "armadura": None, "accesorio": None}
