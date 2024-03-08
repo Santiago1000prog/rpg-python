@@ -118,6 +118,9 @@ def bucle_principal(personaje, mapa):
         if opcion == "1":
             nuevas_coordenadas = obtener_nuevas_coordenadas(mapa, posicion_actual)
             if nuevas_coordenadas is not None:
+                print(
+                    f"\nTe has movido a: {mapa.describir_ubicacion(nuevas_coordenadas)}"
+                )
                 mapa.mover_personaje(personaje, nuevas_coordenadas)
                 posicion_actual = nuevas_coordenadas
         elif opcion == "2":
