@@ -6,12 +6,8 @@ class Mapa:
     def mover_personaje(self, personaje, coordenadas):
         nueva_ubicacion = self.ubicaciones.get(coordenadas)
 
-        if nueva_ubicacion:
-            if isinstance(nueva_ubicacion, dict):
-                self.procesar_ubicacion(personaje, nueva_ubicacion)
-            else:
-                print(f"\nHas llegado a: {nueva_ubicacion}")
-                print("Parece que aquí no hay nada interesante.")
+        if nueva_ubicacion and isinstance(nueva_ubicacion, dict):
+            self.procesar_ubicacion(personaje, nueva_ubicacion)
 
     def procesar_ubicacion(self, personaje, nueva_ubicacion):
         print(f"\nHas llegado a: {nueva_ubicacion['descripcion']}")
